@@ -10,7 +10,7 @@ const Review = () => {
     if(number > people.length -1){ // if number is less than the last item of the index then return the 1st item of the index
       return 0;
     }
-    if(number > 0){
+    if(number < 0){
       return people.length -1;
     }
     return number;
@@ -20,18 +20,29 @@ const Review = () => {
       let newIndex = index + 1; // passing to the next index 
     
       return checkNumber(newIndex); // return newIndex object
-      console.log(setIndex);
+      // console.log(setIndex);
     });
   }
   const prevPerson = () => {
     setIndex((index) => {
       let newIndex = index - 1; 
       return checkNumber(newIndex);
-      console.log(setIndex);
+      // console.log(setIndex);
     });
   }
 
-  return <article className= "review">
+  const randomPerson = () => {
+    let randomNumber = Math.floor(Math.random() * people.length); //use Math.random for the random number to get the random people of the array index 
+
+    if(randomNumber === index){ 
+      randomNumber = index + 1;
+    }
+    setIndex(checkNumber(randomNumber)); 
+
+    console.log(randomNumber);
+  }
+
+  return (<article className= "review">
     <div className="img-container">
       <img src={image} alt={name} className = 'person-img'/>
       <span className="quote-icon">
@@ -50,7 +61,7 @@ const Review = () => {
         <FaChevronRight />
       </button>
     </div>
-      <button className='random-btn'>surprise me</button>
-  </article>
+      <button className='random-btn' onClick = {randomPerson}>surprise me</button>
+  </article>)
 };
  export default Review;
